@@ -29,7 +29,7 @@
                         <a href="<c:url value='?action=${actEmp}&command=${commIdx}' />">従業員管理</a>&nbsp;
                     </c:if>
                     <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">日報管理</a>&nbsp;
-                    <a href="<c:url value='?action=&{actRep}&command=${commIdx}' />">フォロー社員</a>&nbsp;
+                    <a href="<c:url value='?action=&{actRep}&command=${commIdx}' />">フォロー社員</a>&nbsp;<!-- 追加 -->
                 </c:if>
             </div>
             <c:if test="${sessionScope.login_employee != null}">
@@ -41,7 +41,7 @@
             </c:if>
         </div>
         <div id="content">${param.content}</div>
-        <div id="footer">by Yuji Hanato.</div>
+        <div id="footer">by Yuji Hanato.</div><!-- 変更 -->
     </div>
 </body>
 </html>
