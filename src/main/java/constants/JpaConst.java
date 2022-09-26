@@ -40,16 +40,19 @@ public interface JpaConst {
     String REP_COL_CREATED_AT = "created_at"; //登録日時
     String REP_COL_UPDATED_AT = "updated_at"; //更新日時
 
+    //追加
     //フォローテーブル
     String TABLE_FOL = "follow";//テーブル名
     //フォローテーブルカラム
     String FOL_COL_ID = "id";//id
     String FOL_COL_EMP = "employee_id";//フォローを行った従業員のid
     String FOL_COL_CREATED_AT = "created_at";//登録日時
+    //追加ここまで
 
     //Entity名
     String ENTITY_EMP = "employee"; //従業員
     String ENTITY_REP = "report"; //日報
+    String ENTITY_FOL= "follow" ;//フォロー社員（追加）
 
     //JPQL内パラメータ
     String JPQL_PARM_CODE = "code"; //社員番号
@@ -82,5 +85,13 @@ public interface JpaConst {
     String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
 
+    //追加
+    //すべてのフォロー社員のidを降順に取得する
+    String Q_FOL_GET_ALL = ENTITY_FOL + ".getAll";//name
+    String Q_FOL_GET_ALL_DEF="SELECT e FROM Follow AS e ORDER BY e.id DESC";//query
+    //全てのフォロー社員の件数を取得する
+    String Q_FOL_COUNT = ENTITY_FOL + ".count";
+    String Q_FOL_COUNT_DEF = "SELECT COUNT(f) FROM Follow AS f";
+    //追加ここまで
 }
 
