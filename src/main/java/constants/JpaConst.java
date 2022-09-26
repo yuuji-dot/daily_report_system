@@ -40,6 +40,13 @@ public interface JpaConst {
     String REP_COL_CREATED_AT = "created_at"; //登録日時
     String REP_COL_UPDATED_AT = "updated_at"; //更新日時
 
+    //フォローテーブル
+    String TABLE_FOL = "follow";//テーブル名
+    //フォローテーブルカラム
+    String FOL_COL_ID = "id";//id
+    String FOL_COL_EMP = "employee_id";//フォローを行った従業員のid
+    String FOL_COL_CREATED_AT = "created_at";//登録日時
+
     //Entity名
     String ENTITY_EMP = "employee"; //従業員
     String ENTITY_REP = "report"; //日報
