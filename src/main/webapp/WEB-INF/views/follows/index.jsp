@@ -16,6 +16,9 @@
             </div>
         </c:if>
         <h2>フォロー社員　一覧</h2>
+        <form method="POST" action="<c:url value='/?action=${action}&command=${command}' />">
+            <c:import url="search.jsp" />
+        </form>
         <table id="follow_list">
             <tbody>
                 <tr>
@@ -27,13 +30,16 @@
                     <tr class="row${status.count % 2}">
                         <td class="follow_name"><c:out value="${follow.emoloyee.name}"/></td>
                         <td class="follow_action"><a href="<c:url value='?action=${actFol}&command={commshow}&id=${follow.id}' />">詳細を見る</a></td>
+                        <!-- ここにフォローする・外すを追加する -->
                 </c:forEach>
             </tbody>
         </table>
 
+
+
         <div id="pagination">
-            (全 ${reports_count} 件）<br />
-            <c:forEach var="i" begin="1" end="${((reports_count - 1) / maxRow) + 1}" step="1">
+            (全 ${follows_count} 件）<br />
+            <c:forEach var="i" begin="1" end="${((follows_count - 1) / maxRow) + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
                         <c:out value="${i}" />&nbsp;
