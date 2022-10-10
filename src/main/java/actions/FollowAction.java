@@ -66,4 +66,12 @@ public class FollowAction extends ActionBase {
      *フォローを行う
      */
 
+    /**
+     *
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void show() throws ServletException, IOException{
+
+    }
 }

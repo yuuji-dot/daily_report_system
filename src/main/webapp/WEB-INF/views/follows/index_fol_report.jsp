@@ -20,7 +20,7 @@
                 </tr>
                 <tr>
                     <th>氏名</th>
-                    <td><c:out value="${report.employee.name}" /></td>
+                    <td><c:out value="${follow.employee.name}" /></td>
                 </tr>
                 <tr>
                     <th>操作</th>

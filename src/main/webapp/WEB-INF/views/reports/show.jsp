@@ -4,6 +4,7 @@
 <%@ page import="constants.ForwardConst" %>
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
+<c:set var="actFol" value="${ForwardConst.ACT_FOL.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commEdt" value="${ForwardConst.CMD_EDIT.getValue()}" />
 
@@ -48,6 +49,9 @@
 
         <p>
             <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a>
+        </p>
+        <p>
+            <a href="<c:url value='?action=${actFol}&command=${commFol}' />">フォローする</a><!-- フォローのコマンドはダミー -->
         </p>
     </c:param>
 </c:import>

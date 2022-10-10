@@ -32,6 +32,7 @@ public enum ForwardConst {
 
     //command追加
     CMD_TOP("top"),
+    CMD_FOLLOW("follow"),
     //command追加ここまで
 
     //jsp

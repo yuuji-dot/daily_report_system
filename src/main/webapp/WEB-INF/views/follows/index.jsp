@@ -28,9 +28,13 @@
                 </tr>
                 <c:forEach var="follow" items="${follows}"  varStatus="status">
                     <tr class="row${status.count % 2}">
+                        <td class="follow_number"><c:out value="${follow.employee.code}" /></td>
                         <td class="follow_name"><c:out value="${follow.emoloyee.name}"/></td>
                         <td class="follow_action"><a href="<c:url value='?action=${actFol}&command={commshow}&id=${follow.id}' />">詳細を見る</a></td>
-                        <!-- ここにフォローする・外すを追加する -->
+                        <c:if test="">
+                            <td class="follow_actiom"><a href="<c:url value='?action=&{actFol}&command={commfol}' />">フォローする</a></td>
+
+                        </c:if>
                 </c:forEach>
             </tbody>
         </table>

@@ -45,7 +45,8 @@ public interface JpaConst {
     String TABLE_FOL = "follows";//テーブル名
     //フォローテーブルカラム
     String FOL_COL_ID = "id";//id
-    String FOL_COL_EMP = "employee_id";//フォローを行った従業員のid
+    String FOL_COL_EMP = "followed_id";//フォローを行った従業員のid
+    String FOL_COL_F_EMP ="follower_id";//フォローされた従業員のid
     String FOL_COL_CREATED_AT = "created_at";//登録日時
     //追加ここまで
 
@@ -104,7 +105,7 @@ public interface JpaConst {
     //指定した従業員が作成した日報の件数を取得する
     String Q_FOL_COUNT_ALL_MINE = ENTITY_FOL + ".countAllMine";
     String Q_FOL_SPECIAL_COUNT = Q_FOL_COUNT_ALL_MINE;
-    String Q_FOL_COUNT_ALL_MINE_DEF = "SELECT COUNT(f) FROM  AS f WHERE f.employee = :" + JPQL_PARM_EMPLOYEE;
+    String Q_FOL_COUNT_ALL_MINE_DEF = "SELECT COUNT(f) FROM Follow AS f WHERE f.employee = :" + JPQL_PARM_EMPLOYEE;
     String Q_FOL_SPECIAL_COUNT_DEF = Q_FOL_COUNT_ALL_MINE_DEF;
 
     /*追加ここまで
