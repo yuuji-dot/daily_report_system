@@ -67,9 +67,63 @@ public class FollowAction extends ActionBase {
         //一覧画面を表示
         forward(ForwardConst.FW_FOL_INDEX);
     }
-    /**
-     * 社員番号で検索する
 
+    /**
+     * 名前で検索する
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void namesearch() throws ServletException, IOException{
+        int page = getPage();
+        List<FollowView> follows = service.getPerPage(page);
+
+        long followCount = service.countAll();
+
+        putRequestScope(AttributeConst.FOLLOWS, follows);
+        putRequestScope(AttributeConst.FOL_COUNT, followCount);
+        putRequestScope(AttributeConst.PAGE, page);
+        putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE);
+        putRequestScope(AttributeConst.FOL_NAME, followsname);
+
+
+    forward(ForwardConst.FW_FOL_INDEX);
+
+}
+    /**
+    public void namesearch() throws ServletException, IOException{
+    String name = getRequestParam(AttributeConst.EMP_NAME);
+    String pepper = getContextScope(PropertyConst.PEPPER);
+
+    Boolean isValidEmployee = service.validatenameSearch(name, pepper);
+
+    if(isValidEmployee) {
+        if(checkToken()) {
+            FollowView fv=service.findOne(name, pepper);
+            putSessionScope(AttributeConst.EMP_NAME, fv);
+
+        }else {
+            putRequestScope(AttributeConst.TOKEN, getTokenId());
+            putRequestScope(AttributeConst.FOL_FAILUE, true);
+
+            forward(ForwardConst.FW_FOL_SEARCH);
+
+        }
+    }*/
+    public void numbersearch() throws ServletException, IOException{
+        int page = getPage();
+        List<FollowView> follows = service.getPerPage(page);
+
+        long followsCount = service.countAll();
+
+        putRequestScope(AttributeConst.FOLLOWS, follows);
+        putRequestScope(AttributeConst.FOL_COUNT, followsCount);
+        putRequestScope(AttributeConst.PAGE, page);
+        putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE);
+        putRequestScope(AttributeConst.FOL_NUMBER, followsnumber);
+
+    forward(ForwardConst.FW_FOL_INDEX);
+    }
+    /**
     public void numbersearch() throws ServletException, IOException{
         String code = getRequestParam(AttributeConst.EMP_CODE);
         String pepper = getContextScope(PropertyConst.PEPPER);
@@ -94,62 +148,6 @@ public class FollowAction extends ActionBase {
         }
     }
     */
-    /**
-    public void namesearch() throws ServletException, IOException{
-    String name = getRequestParam(AttributeConst.EMP_NAME);
-    String pepper = getContextScope(PropertyConst.PEPPER);
-
-    Boolean isValidEmployee = service.validatenameSearch(name, pepper);
-
-    if(isValidEmployee) {
-        if(checkToken()) {
-            FollowView fv=service.findOne(name, pepper);
-            putSessionScope(AttributeConst.EMP_NAME, fv);
-
-        }else {
-            putRequestScope(AttributeConst.TOKEN, getTokenId());
-            putRequestScope(AttributeConst.FOL_FAILUE, true);
-
-            forward(ForwardConst.FW_FOL_SEARCH);
-
-        }
-    }*/
-
-    /**
-     * 名前で検索する
-     * @throws ServletException
-     * @throws IOException
-     */
-    public void namesearch() throws ServletException, IOException{
-        int page = getPage();
-        List<FollowView> follows = service.getPerPage(page);
-
-        long followCount = service.countAll();
-
-        putRequestScope(AttributeConst.FOLLOWS, follows);
-        putRequestScope(AttributeConst.FOL_COUNT, followCount);
-        putRequestScope(AttributeConst.PAGE, page);
-        putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE);
-        putRequestScope(AttributeConst.FOL_NAME,  followsname);
-
-
-    forward(ForwardConst.FW_FOL_INDEX);
-
-}
-    public void numbersearch() throws ServletException, IOException{
-        int page = getPage();
-        List<FollowView> follows = service.getPerPage(page);
-
-        long followsCount = service.countAll();
-
-        putRequestScope(AttributeConst.FOLLOWS, follows);
-        putRequestScope(AttributeConst.FOL_COUNT, followsCount);
-        putRequestScope(AttributeConst.PAGE, page);
-        putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE);
-        putRequestScope(AttributeConst.FOL_NUMBER,  followsnumber);
-
-    forward(ForwardConst.FW_FOL_INDEX);
-    }
     /**
      *フォローを行う
      */
