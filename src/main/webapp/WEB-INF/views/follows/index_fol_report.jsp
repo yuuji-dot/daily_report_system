@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <th>操作</th>
-                    <td class="report_action"><a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></td>
+                    <td class="report_action"><a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">日報を閲覧する</a></td>
                 </tr>
             </tbody>
         </table>

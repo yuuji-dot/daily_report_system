@@ -73,4 +73,9 @@ public class Follow {
      */
     @Column(name = JpaConst.FOL_COL_CREATED_AT, nullable = false)
     private LocalDateTime createdAt;
-}
+
+
+
+    }
+
+

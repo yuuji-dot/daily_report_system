@@ -29,6 +29,7 @@ public enum MessageConst {
     F_OUT("フォローを外しました");
 
 
+
     /**
      * 文字列
      */

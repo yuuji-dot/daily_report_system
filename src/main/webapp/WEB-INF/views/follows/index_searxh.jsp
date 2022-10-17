@@ -1,18 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="constants.ForwardConst" %>
 
-<c:set var="actFol" value="${ForwardConst.ACT_FOL.getValue()}" />
+<c:set var="action" value="${ForwardConst.ACT_FOL.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
-<c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
-<c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
+<c:set var="commCrt" value="${ForwardConst.CMD_CREATE.getValue()}" />
+<c:set var="commsearch" value="${AttributeConst.CMD_SEARCH.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-
-        <h2>フォロー社員　一覧</h2>
-
+        <h2>検索結果一覧</h2>
+        <c:if test="${flush != null}">
+            <div id="flush_success">
+                <c:out value="${flush}"></c:out>
+            </div>
+        </c:if>
+                <form method="POST" action="<c:url value='/?action=${action}&command=${commsearch}' />">
+                    <c:import url="search.jsp" />
+                </form>
         <table id="follow_list">
             <tbody>
                 <tr>
@@ -24,8 +30,12 @@
                     <tr class="row${status.count % 2}">
                         <td class="follow_number"><c:out value="${follow.employee.code}" /></td>
                         <td class="follow_name"><c:out value="${follow.emoloyee.name}"/></td>
-                        <td class="follow_action"><a href="<c:url value='?action=${actFol}&command={commshow}&id=${follow.id}' />">日報一覧</a></td>
-
+                        <td class="follow_action"><a href="<c:url value='?action=${actFol}&command={commshow}&id=${follow.id}' />">日報一覧へ</a></td>
+                        <c:if test="">
+                            <td class="follow_action"><a href="<c:url value='?action=&{actFol}&command={commfol}' />">フォローする</a></td>
+                            <!-- 条件によって「フォローを外す」を表示する -->
+                            <td class="follow_action"><a href="<c:url value='?action=&{actFol}&command={commfol}' />">フォローを外す</a></td>
+                        </c:if>
                 </c:forEach>
             </tbody>
         </table>

@@ -100,12 +100,12 @@ public interface JpaConst {
    //指定した従業員が作成した日報を全件idの降順で取得する
     String Q_FOL_GET_ALL_MINE = ENTITY_FOL + ".getAllMine";
     String Q_FOL_SPECIAL_EMPLOYEE = Q_FOL_GET_ALL_MINE;
-    String Q_FOL_GET_ALL_MINE_DEF = "SELECT f FROM Follow AS f WHERE f.employee = :" + JPQL_PARM_EMPLOYEE + " ORDER BY f.id DESC";
+    String Q_FOL_GET_ALL_MINE_DEF = "SELECT f FROM Follow AS f WHERE f.follower = :" + JPQL_PARM_EMPLOYEE + " ORDER BY f.id DESC";
     String Q_FOL_SPECIAL_EMPLOYEE_DEF = Q_FOL_GET_ALL_MINE_DEF;
     //指定した従業員が作成した日報の件数を取得する
     String Q_FOL_COUNT_ALL_MINE = ENTITY_FOL + ".countAllMine";
     String Q_FOL_SPECIAL_COUNT = Q_FOL_COUNT_ALL_MINE;
-    String Q_FOL_COUNT_ALL_MINE_DEF = "SELECT COUNT(f) FROM Follow AS f WHERE f.employee = :" + JPQL_PARM_EMPLOYEE;
+    String Q_FOL_COUNT_ALL_MINE_DEF = "SELECT COUNT(f) FROM Follow AS f WHERE f.follower = :" + JPQL_PARM_EMPLOYEE;
     String Q_FOL_SPECIAL_COUNT_DEF = Q_FOL_COUNT_ALL_MINE_DEF;
 
     /*追加ここまで

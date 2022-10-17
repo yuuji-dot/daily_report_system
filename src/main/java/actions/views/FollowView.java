@@ -16,7 +16,9 @@ public class FollowView {
     //id
     private Integer id;
     //フォローを行う従業員
-    private EmployeeView employee;
+    private String followed;
+    //フォローされた従業員
+    private String follower;
     //フォロー日時
     private LocalDateTime createdAt;
 }

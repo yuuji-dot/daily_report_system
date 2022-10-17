@@ -35,11 +35,11 @@ public class FollowService extends ServiceBase{
     }
 
     /**
-     * 指定されたページ数の一覧画面に表示する日報データを取得し、ReportViewのリストで返却する
+     * 指定されたページ数の一覧画面に表示する日報データを取得し、FollowViewのリストで返却する
      * @param page ページ数
      * @return 一覧画面に表示するデータのリスト
      */
-    public List<FollowView> getAllPerPage(int page) {
+    public List<FollowView> getPerPage(int page) {
 
         List<Follow> follows = em.createNamedQuery(JpaConst.Q_FOL_GET_ALL, Follow.class)
                 .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
@@ -48,8 +48,9 @@ public class FollowService extends ServiceBase{
         return FollowConverter.toViewList(follows);
     }
 
+
     /**
-     * 日報テーブルのデータの件数を取得し、返却する
+     * フォローテーブルのデータの件数を取得し、返却する
      * @return データの件数
      */
     public long countAll() {
@@ -63,6 +64,32 @@ public class FollowService extends ServiceBase{
     }
 
 
+    public Boolean validatenumberSearch(String f_employee, String pepper) {
+        boolean isValidEmployee = false;
+        if(f_employee !=null && !f_employee.equals("")) {
+            FollowView fv = findOne(f_employee,pepper);
+
+            if(fv !=null && fv.getId() != null) {
+                isValidEmployee = true;
+            }
+        }
+        return isValidEmployee;
+    }
+
+    public Boolean validatenameSearch(String name, String pepper) {
+        boolean isValidEmployee = false;
+        if(name !=null && !name.equals(""));
+            FollowView fv = findOne(name, pepper);
+            if(fv !=null && fv.getId() !=null) {
+                isValidEmployee = true;
+            }
+            return isValidEmployee;
+}
+
+    private FollowView findOne(String name, String pepper) {
+        // TODO 自動生成されたメソッド・スタブ
+        return null;
+    }
     /**
      * idを条件にデータを1件取得する
      * @param id
@@ -70,6 +97,10 @@ public class FollowService extends ServiceBase{
      */
     private Follow findOneInternal(int id) {
         return em.find(Follow.class, id);
+    }
+    public void destroy(int number) {
+        // TODO 自動生成されたメソッド・スタブ
+
     }
 
 }

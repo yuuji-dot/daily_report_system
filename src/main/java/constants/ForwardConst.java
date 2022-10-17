@@ -30,9 +30,11 @@ public enum ForwardConst {
     CMD_UPDATE("update"),
     CMD_DESTROY("destroy"),
 
+
     //command追加
     CMD_TOP("top"),
     CMD_FOLLOW("follow"),
+    CMD_SEARCH("search"),
     //command追加ここまで
 
     //jsp
@@ -52,7 +54,9 @@ public enum ForwardConst {
     FW_FOL_INDEX("follows/index"),
     FW_FOL_SHOW("follows/show"),
     FW_FOL_NEW("follows/new"),
-    FW_FOL_EDIT("follows/edit");
+    FW_FOL_EDIT("follows/edit"),
+    FW_FOL_TOP("follows/top"),
+    FW_FOL_SEARCH("follows/search");
     //jsp追加ここまで
 
 

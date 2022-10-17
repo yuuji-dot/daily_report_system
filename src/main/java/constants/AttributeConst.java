@@ -55,7 +55,14 @@ public enum AttributeConst {
     */
     FOLLOW("follow"),
     FOLLOWS("follows"),
-    FOL_COUNT("follows_count");
+    FOL_COUNT("follows_count"),
+    FOL_COUNTS("follows_count"),
+    FOL_ID("id"),
+    FOL_FOLLOWED("followed"),//フォローされた従業員
+    FOL_NAME("followsname"),//フォローする従業員の氏名
+    FOL_NUMBER("followsnumber"),
+    FOL_SUCCESS("success"),
+    FOL_FAILUE("failue");
     //追加ここまで
 
     private final String text;
