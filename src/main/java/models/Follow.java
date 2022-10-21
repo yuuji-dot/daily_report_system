@@ -64,7 +64,7 @@ public class Follow {
      * フォローされた従業員のID
      */
     @ManyToOne
-    @JoinColumn(name = JpaConst.FOL_COL_EMP, nullable = false)
+    @JoinColumn(name = JpaConst.FOL_COL_F_EMP, nullable = false)
     private Employee follower;
 
 
@@ -73,6 +73,12 @@ public class Follow {
      */
     @Column(name = JpaConst.FOL_COL_CREATED_AT, nullable = false)
     private LocalDateTime createdAt;
+
+    /**
+     * 削除された従業員かどうか（現役：0、削除済み：1）
+     */
+    @Column(name = JpaConst.FOL_COL_DELETE_FLAG, nullable = false)
+    private Integer deleteFlag;
 
 
 

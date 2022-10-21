@@ -48,6 +48,10 @@ public interface JpaConst {
     String FOL_COL_EMP = "followed_id";//フォローを行った従業員のid
     String FOL_COL_F_EMP ="follower_id";//フォローされた従業員のid
     String FOL_COL_CREATED_AT = "created_at";//登録日時
+    String FOL_COL_DELETE_FLAG ="delete_flag";//削除フラグ
+
+    int FOL_DEL_TRUE = 1; //削除フラグON(削除済み)
+    int FOL_DEL_FALSE = 0; //削除フラグOFF(現役)
     //追加ここまで
 
     //Entity名
@@ -107,6 +111,13 @@ public interface JpaConst {
     String Q_FOL_SPECIAL_COUNT = Q_FOL_COUNT_ALL_MINE;
     String Q_FOL_COUNT_ALL_MINE_DEF = "SELECT COUNT(f) FROM Follow AS f WHERE f.follower = :" + JPQL_PARM_EMPLOYEE;
     String Q_FOL_SPECIAL_COUNT_DEF = Q_FOL_COUNT_ALL_MINE_DEF;
+
+    //従業員の名前を取得する
+    String Q_FOL_GET_NAME = ENTITY_FOL + ".getname";
+    String Q_FOL_GET_NAME_DEF = "SELECT f FROM Follows AS f WHERE f.follower";//仮置き
+    //従業員の社員番号を取得する
+    String Q_FOL_GET_NUMBER = ENTITY_FOL +"getnumber";
+    String Q_FOL_GET_NUMBER_DEF = "SELECT f FROM Follow As f WHERE f.follower";//仮置き
 
     /*追加ここまで
 

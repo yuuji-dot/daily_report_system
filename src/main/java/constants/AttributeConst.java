@@ -62,7 +62,10 @@ public enum AttributeConst {
     FOL_NAME("followsname"),//フォローする従業員の氏名
     FOL_NUMBER("followsnumber"),
     FOL_SUCCESS("success"),
-    FOL_FAILUE("failue");
+    FOL_FAILUE("failue"),
+    FOL_FOLLOWED_SUCCESS("followsuccess"),
+    FOL_FOLLOWED_OUT("followfailue"),
+    FOL_TOP("top");
     //追加ここまで
 
     private final String text;

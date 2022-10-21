@@ -26,7 +26,8 @@ public enum MessageConst {
 
     //フォローに関するメッセージ
     F_SUCESS("フォローしました"),
-    F_OUT("フォローを外しました");
+    F_OUT("フォローを外しました"),
+    F_FAILUE("フォローに失敗しました");
 
 
 

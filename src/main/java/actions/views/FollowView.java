@@ -16,9 +16,11 @@ public class FollowView {
     //id
     private Integer id;
     //フォローを行う従業員
-    private String followed;
+    private EmployeeView followed;
     //フォローされた従業員
-    private String follower;
+    private EmployeeView follower;
     //フォロー日時
     private LocalDateTime createdAt;
+    //フォローを外されたかどうか（フォロー中：0、削除済み：1）
+    private Integer deleteFlag;
 }

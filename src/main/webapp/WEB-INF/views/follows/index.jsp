@@ -6,7 +6,7 @@
 <c:set var="actFol" value="${ForwardConst.ACT_FOL.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
-<c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
+<c:set var="commSearch" value="${ForwardConst.CMD_SEARCH.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -24,8 +24,7 @@
                     <tr class="row${status.count % 2}">
                         <td class="follow_number"><c:out value="${follow.employee.code}" /></td>
                         <td class="follow_name"><c:out value="${follow.emoloyee.name}"/></td>
-                        <td class="follow_action"><a href="<c:url value='?action=${actFol}&command={commshow}&id=${follow.id}' />">日報一覧</a></td>
-
+                        <td class="follow_action"><a href="<c:url value='?action=${actFol}&command={commShow}&id=${follow.id}' />">日報一覧</a></td>
                 </c:forEach>
             </tbody>
         </table>
@@ -38,11 +37,11 @@
                         <c:out value="${i}" />&nbsp;
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='?action=${actFo;}&command=${commIdx}&page=${i}' />"><c:out value="${i}" /></a>&nbsp;
+                        <a href="<c:url value='?action=${actFol}&command=${commIdx}&page=${i}' />"><c:out value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a href="<c:url value='?action=${actFol}&command=${commTop}' />">トップに戻る</a></p>
+        <p><a href="<c:url value='?action=${actFol}&command=${commSearch}' />">フォローする社員を探す</a></p>
     </c:param>
 </c:import>

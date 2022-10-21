@@ -52,9 +52,10 @@ public enum ForwardConst {
 
     //jsp追加
     FW_FOL_INDEX("follows/index"),
+    FW_FOL_F_INDEX("follows/f_index"),
+    FW_FOL_REPORT("follows/report"),
     FW_FOL_SHOW("follows/show"),
     FW_FOL_NEW("follows/new"),
-    FW_FOL_EDIT("follows/edit"),
     FW_FOL_TOP("follows/top"),
     FW_FOL_SEARCH("follows/search");
     //jsp追加ここまで

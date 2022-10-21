@@ -68,27 +68,57 @@ public class FollowAction extends ActionBase {
         forward(ForwardConst.FW_FOL_INDEX);
     }
 
+    //全社員を一覧表示する
+    public void search() throws ServletException, IOException{
+        //指定されたページ数の一覧画面に表示するフォロー社員データを取得
+        int page = getPage();
+        List<FollowView> allemployee = service.getPerPage(page);
+
+        long allCount =service.countAll();
+
+        putRequestScope(AttributeConst.EMPLOYEES, allemployee);
+        putRequestScope(AttributeConst.EMP_COUNT, allCount);
+        putRequestScope(AttributeConst.PAGE, page);
+        putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE);
+
+        //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+        String flush = getSessionScope(AttributeConst.FLUSH);
+        if (flush != null) {
+            putRequestScope(AttributeConst.FLUSH, flush);
+            removeSessionScope(AttributeConst.FLUSH);
+        }
+
+        forward(ForwardConst.FW_FOL_SEARCH);
+    }
+
     /**
      * 名前で検索する
      * @throws ServletException
      * @throws IOException
      */
-    public void namesearch() throws ServletException, IOException{
+    /*public void namesearch() throws ServletException, IOException{
+        String namesearch =  service.getName(name);
+        //指定されたページ数の一覧画面に表示するデータを取得
         int page = getPage();
         List<FollowView> follows = service.getPerPage(page);
 
         long followCount = service.countAll();
 
+        putRequestScope(AttributeConst.FOL_NAME, namesearch);
         putRequestScope(AttributeConst.FOLLOWS, follows);
         putRequestScope(AttributeConst.FOL_COUNT, followCount);
         putRequestScope(AttributeConst.PAGE, page);
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE);
-        putRequestScope(AttributeConst.FOL_NAME, followsname);
 
-
+        //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+        String flush = getSessionScope(AttributeConst.FLUSH);
+        if (flush != null) {
+            putRequestScope(AttributeConst.FLUSH, flush);
+            removeSessionScope(AttributeConst.FLUSH);
+        }
     forward(ForwardConst.FW_FOL_INDEX);
 
-}
+}*/
     /**
     public void namesearch() throws ServletException, IOException{
     String name = getRequestParam(AttributeConst.EMP_NAME);
@@ -109,20 +139,28 @@ public class FollowAction extends ActionBase {
 
         }
     }*/
-    public void numbersearch() throws ServletException, IOException{
+    /*public void numbersearch() throws ServletException, IOException{
+        String numbersearch = service.getNnmber(number);
+        //指定されたページ数の一覧画面に表示するデータを取得
         int page = getPage();
         List<FollowView> follows = service.getPerPage(page);
 
         long followsCount = service.countAll();
 
+        putRequestScope(AttributeConst.FOL_NUMBER, numbersearch);
         putRequestScope(AttributeConst.FOLLOWS, follows);
         putRequestScope(AttributeConst.FOL_COUNT, followsCount);
         putRequestScope(AttributeConst.PAGE, page);
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE);
-        putRequestScope(AttributeConst.FOL_NUMBER, followsnumber);
 
+        //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+        String flush = getSessionScope(AttributeConst.FLUSH);
+        if (flush != null) {
+            putRequestScope(AttributeConst.FLUSH, flush);
+            removeSessionScope(AttributeConst.FLUSH);
+        }
     forward(ForwardConst.FW_FOL_INDEX);
-    }
+    }*/
     /**
     public void numbersearch() throws ServletException, IOException{
         String code = getRequestParam(AttributeConst.EMP_CODE);
@@ -152,32 +190,34 @@ public class FollowAction extends ActionBase {
      *フォローを行う
      */
 
-    public void follow() throws ServletException, IOException{
+    public void create() throws ServletException, IOException{
 
         //セッションからログイン中の従業員情報を取得
-        EmployeeView fv =(EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+        EmployeeView ev =(EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+        EmployeeView followedEmployee=(EmployeeView)getSessionScope(AttributeConst.FOL_FOLLOWED);
         //フォロー
-
         FollowView fv = new FollowView(
                 null,
-                fv,
-                getRequestParam(AttributeConst.FOL_FOLLOWED),
+                ev,
+                followedEmployee,
+                null,
                 null);
-
+       //アプリケーションスコープからpepper文字列を取得
         String pepper = getContextScope(PropertyConst.PEPPER);
 
-        List<String> errors = service.follow(fv, pepper);
+        List<String> errors = service.create(fv, pepper);
 
 
         if(errors.size() > 0) {
           //フォローが成功した場合
             putSessionScope(AttributeConst.FLUSH, MessageConst.F_SUCESS.getMessage());
         }else {
-            //フォローがを外す場合
-            putSessionScope(AttributeConst.FLUSH, MessageConst.F_OUT.getMessage());
+            //フォローが失敗した場合
+            putSessionScope(AttributeConst.FLUSH, MessageConst.F_FAILUE.getMessage());
 
-            forward(ForwardConst.FW_FOL_SEARCH);
         }
+
+        forward(ForwardConst.FW_FOL_TOP);
     }
 
 
@@ -196,6 +236,8 @@ public class FollowAction extends ActionBase {
         putRequestScope(AttributeConst.REP_COUNT, folReportsCount); //フォローした従業員が作成した日報の数
         putRequestScope(AttributeConst.PAGE, page); //ページ数
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
+
+        forward(ForwardConst.FW_FOL_REPORT);
     }
 
     //フォローを外す

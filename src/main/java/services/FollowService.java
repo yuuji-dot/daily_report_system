@@ -1,5 +1,6 @@
 package services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import actions.views.EmployeeConverter;
@@ -8,6 +9,7 @@ import actions.views.FollowConverter;
 import actions.views.FollowView;
 import constants.JpaConst;
 import models.Follow;
+import models.validators.FollowValidator;
 
 public class FollowService extends ServiceBase{
 
@@ -33,6 +35,35 @@ public class FollowService extends ServiceBase{
 
         return count;
     }
+
+    public List<String> create(FollowView fv, String pepper){
+        LocalDateTime now = LocalDateTime.now();
+        fv.setCreatedAt(now);
+
+        List<String> errors = FollowValidator.validate(null, fv);
+
+        if(errors.size() == 0){
+            create(fv);
+        }
+        return errors;
+
+    }
+
+    /**
+     * 指定した検索条件の氏名を取得し返却する
+     *
+
+    public String getName(String name){
+        String namesearch = em.createNamedQury(JpaConst.Q_FOL_GET_NAME,);
+
+        return namesearch;
+    }
+
+    public long getNumber(int number){
+        long numbersearch = em.createNamedQuery(JpaConst.Q_FOL_GET_NUMBER,);
+
+        return numbersearch;
+    }*/
 
     /**
      * 指定されたページ数の一覧画面に表示する日報データを取得し、FollowViewのリストで返却する
@@ -60,11 +91,18 @@ public class FollowService extends ServiceBase{
     }
 
     public FollowView findOne(int id) {
-        return FollowConverter.toView(findOneInternal(id));
+        Follow f = findOneInternal(id);
+        return FollowConverter.toView(f);
     }
 
 
-    public Boolean validatenumberSearch(String f_employee, String pepper) {
+    public void destroy(Integer id) {
+        FollowView savedFol = findOne(id);
+        savedFol.setDeleteFlag(JpaConst.EMP_DEL_TRUE);
+    }
+
+
+    /*public Boolean validatenumberSearch(String f_employee, String pepper) {
         boolean isValidEmployee = false;
         if(f_employee !=null && !f_employee.equals("")) {
             FollowView fv = findOne(f_employee,pepper);
@@ -89,19 +127,28 @@ public class FollowService extends ServiceBase{
     private FollowView findOne(String name, String pepper) {
         // TODO 自動生成されたメソッド・スタブ
         return null;
-    }
+    }*/
     /**
      * idを条件にデータを1件取得する
      * @param id
      * @return 取得データのインスタンス
      */
     private Follow findOneInternal(int id) {
-        return em.find(Follow.class, id);
+        Follow f =em.find(Follow.class, id);
+
+        return f;
     }
-    public void destroy(int number) {
-        // TODO 自動生成されたメソッド・スタブ
+
+
+    private void create(FollowView fv) {
+
+        em.getTransaction().begin();
+        em.persist(FollowConverter.toModel(fv));
+        em.getTransaction().commit();
 
     }
 
 }
+
+
 

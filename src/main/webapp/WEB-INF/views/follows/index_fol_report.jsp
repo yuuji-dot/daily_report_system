@@ -7,6 +7,7 @@
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commCrt" value="${ForwardConst.CMD_CREATE.getValue()}" />
 
+
 <!-- 指定した社員の日報一覧を表示する -->
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
