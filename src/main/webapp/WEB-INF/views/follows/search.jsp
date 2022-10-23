@@ -40,7 +40,7 @@
                     <c:if test="${follow.id} == ${employee.id}">
                         <c:set var="isFollowed" value="true" />
                     </c:if>
-  </c:forEach>
+               </c:forEach>
 
   <c:choose>
     <c:when test="${isFollowed}">
