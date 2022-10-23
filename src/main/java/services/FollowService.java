@@ -90,6 +90,7 @@ public class FollowService extends ServiceBase{
     }
 
 
+
     /**
      * フォローテーブルのデータの件数を取得し、返却する
      * @return データの件数

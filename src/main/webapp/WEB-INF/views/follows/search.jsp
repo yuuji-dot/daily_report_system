@@ -31,40 +31,28 @@
                     <tr class="row${status.count % 2}">
                         <td class="follow_number"><c:out value="${employee.code}" /></td>
                         <td class="follow_name"><c:out value="${employee.name}" /></td>
-                </c:forEach>
-                  <c:forEach var="employee" items="${employees}">
-
-                <c:set var="isFollowed" value="false" />
-
-               <c:forEach var="follow" items="${follows}">
-                    <c:if test="${follow.id} == ${employee.id}">
-                        <c:set var="isFollowed" value="true" />
-                    </c:if>
-               </c:forEach>
-
-  <c:choose>
-    <c:when test="${isFollowed}">
-      <!-- フォロー済みのためフォローを外すリンクを表示 -->
-    </c:when>
-    <c:otherwise>
-      <!-- 未フォローのためフォローするすリンクを表示 -->
-    </c:otherwise>
-  </c:choose>
-
-
+                        <c:choose>
+                        <c:when test="${sessionScope.login_employee.id == employee.id}">
+                            <td class="follow_action"><a href="<c:url value='?action=${actFol}&command=${commCrt}&id=${employee.id}' />">フォローできない</a></td>
+                        </c:when>
+                        <c:otherwise>
+                            <td class="follow_action"><a href="<c:url value='?action=${actFol}&command=${commCrt}&id=${employee.id}' />">フォローする</a></td>
+                        </c:otherwise>
+                        </c:choose>
+                    </tr>
                 </c:forEach>
             </tbody>
         </table>
 
         <div id="pagination">
-            （全 ${employees_count} 件）<br />
+
             <c:forEach var="i" begin="1" end="${((employees_count - 1) / maxRow) + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
                         <c:out value="${i}" />&nbsp;
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='?action=${actEmp}&command=${commIdx}&page=${i}' />"><c:out value="${i}" /></a>&nbsp;
+                        <a href="<c:url value='?action=${actFol}&command=${commIdx}&page=${i}' />"><c:out value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
             </c:forEach>

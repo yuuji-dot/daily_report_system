@@ -74,6 +74,8 @@ public class FollowAction extends ActionBase {
         forward(ForwardConst.FW_FOL_INDEX);
     }
 
+
+
     //全社員を一覧表示する
     public void search() throws ServletException, IOException{
         //指定されたページ数の一覧画面に表示するフォロー社員データを取得
@@ -87,6 +89,7 @@ public class FollowAction extends ActionBase {
         putRequestScope(AttributeConst.EMP_COUNT, allCount);
         putRequestScope(AttributeConst.PAGE, page);
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE);
+
 
         //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
         String flush = getSessionScope(AttributeConst.FLUSH);
@@ -225,7 +228,7 @@ public class FollowAction extends ActionBase {
 
         }
 
-        forward(ForwardConst.FW_FOL_INDEX);
+        redirect(ForwardConst.ACT_FOL, ForwardConst.CMD_INDEX);
     }
 
 
