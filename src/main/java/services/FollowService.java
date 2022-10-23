@@ -8,6 +8,7 @@ import actions.views.EmployeeView;
 import actions.views.FollowConverter;
 import actions.views.FollowView;
 import constants.JpaConst;
+import models.Employee;
 import models.Follow;
 import models.validators.FollowValidator;
 
@@ -22,6 +23,15 @@ public class FollowService extends ServiceBase{
                 .getResultList();
         return FollowConverter.toViewList(follows);
     }
+    public List<EmployeeView> getAllPerPage(int page) {
+        List<Employee> employees = em.createNamedQuery(JpaConst.Q_EMP_GET_ALL, Employee.class)
+                .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
+                .setMaxResults(JpaConst.ROW_PER_PAGE)
+                .getResultList();
+
+        return EmployeeConverter.toViewList(employees);
+    }
+
     /**
      * 指定した従業員が作成した日報データの件数を取得し、返却する
      * @param employee
@@ -143,8 +153,14 @@ public class FollowService extends ServiceBase{
     private void create(FollowView fv) {
 
         em.getTransaction().begin();
+        // nullチェック
+        if(fv.getFollowed() == null || fv.getFollower() == null) {
+          System.out.println("followかfollowedか、どっちも？nullやないかい！！ちゃんとインスタンス入れて呼んでよ！");
+        }
+        //toModeメソッド呼び出し。。。
         em.persist(FollowConverter.toModel(fv));
         em.getTransaction().commit();
+
 
     }
 

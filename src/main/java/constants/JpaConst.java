@@ -112,6 +112,8 @@ public interface JpaConst {
     String Q_FOL_COUNT_ALL_MINE_DEF = "SELECT COUNT(f) FROM Follow AS f WHERE f.follower = :" + JPQL_PARM_EMPLOYEE;
     String Q_FOL_SPECIAL_COUNT_DEF = Q_FOL_COUNT_ALL_MINE_DEF;
 
+    String Q_FOL_EMP_GET_ALL = ENTITY_EMP + ".getAll"; //name
+    String Q_FOL_EMP_GET_ALL_DEF = "SELECT e FROM Employee AS e ORDER BY e.id DESC"; //query
     //従業員の名前を取得する
     String Q_FOL_GET_NAME = ENTITY_FOL + ".getname";
     String Q_FOL_GET_NAME_DEF = "SELECT f FROM Follows AS f WHERE f.follower";//仮置き

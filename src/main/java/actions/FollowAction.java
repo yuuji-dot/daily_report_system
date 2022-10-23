@@ -12,6 +12,7 @@ import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
 import constants.PropertyConst;
+import services.EmployeeService;
 import services.FollowService;
 
 /**
@@ -21,6 +22,7 @@ import services.FollowService;
 public class FollowAction extends ActionBase {
 
     private FollowService service;
+    private EmployeeService empService;
 
     /**
      * メソッドを実行する
@@ -29,11 +31,15 @@ public class FollowAction extends ActionBase {
     public void process() throws ServletException, IOException {
 
         service = new FollowService();
+        empService = new EmployeeService();
 
         //メソッドを実行
         invoke();
+
+        empService.close();
         service.close();
     }
+
 
     /**
      * フォロー社員の一覧をトップ画面に表示する。
@@ -72,7 +78,8 @@ public class FollowAction extends ActionBase {
     public void search() throws ServletException, IOException{
         //指定されたページ数の一覧画面に表示するフォロー社員データを取得
         int page = getPage();
-        List<FollowView> allemployee = service.getPerPage(page);
+
+        List<EmployeeView> allemployee = service.getAllPerPage(page);
 
         long allCount =service.countAll();
 
@@ -194,15 +201,16 @@ public class FollowAction extends ActionBase {
 
         //セッションからログイン中の従業員情報を取得
         EmployeeView ev =(EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
-        EmployeeView followedEmployee=(EmployeeView)getSessionScope(AttributeConst.FOL_FOLLOWED);
+        EmployeeView followedEmployee = empService.findOne(toNumber(getRequestParam(AttributeConst.EMP_ID)));
         //フォロー
         FollowView fv = new FollowView(
                 null,
                 ev,
                 followedEmployee,
                 null,
-                null);
+                AttributeConst.DEL_FLAG_FALSE.getIntegerValue());
        //アプリケーションスコープからpepper文字列を取得
+
         String pepper = getContextScope(PropertyConst.PEPPER);
 
         List<String> errors = service.create(fv, pepper);
@@ -217,20 +225,20 @@ public class FollowAction extends ActionBase {
 
         }
 
-        forward(ForwardConst.FW_FOL_TOP);
+        forward(ForwardConst.FW_FOL_INDEX);
     }
 
 
     //フォローした社員の日報一覧を取得する
-    public void f_index() throws ServletException, IOException{
+    public void show() throws ServletException, IOException{
         //フォローした社員の従業員情報を取得
-        EmployeeView followerEmployee = (EmployeeView)getSessionScope(AttributeConst.FOL_FOLLOWED);
+        EmployeeView followedEmployee = (EmployeeView)getSessionScope(AttributeConst.FOL_FOLLOWED);
 
         int page =getPage();
-        List<FollowView> fol_reports = service.getMinePerPage(followerEmployee,page);
+        List<FollowView> fol_reports = service.getMinePerPage(followedEmployee,page);
 
         //フォローした従業員が作成した日報データの件数を取得
-        long folReportsCount = service.countAllMine(followerEmployee);
+        long folReportsCount = service.countAllMine(followedEmployee);
 
         putRequestScope(AttributeConst.REPORTS, fol_reports); //取得した日報データ
         putRequestScope(AttributeConst.REP_COUNT, folReportsCount); //フォローした従業員が作成した日報の数

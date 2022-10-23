@@ -8,6 +8,7 @@
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
 <c:set var="commSearch" value="${ForwardConst.CMD_SEARCH.getValue()}" />
 
+
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
 
@@ -22,9 +23,9 @@
                 </tr>
                 <c:forEach var="follow" items="${follows}"  varStatus="status">
                     <tr class="row${status.count % 2}">
-                        <td class="follow_number"><c:out value="${follow.employee.code}" /></td>
-                        <td class="follow_name"><c:out value="${follow.emoloyee.name}"/></td>
-                        <td class="follow_action"><a href="<c:url value='?action=${actFol}&command={commShow}&id=${follow.id}' />">日報一覧</a></td>
+                        <td class="follow_number"><c:out value="${follow.follower.code}" /></td>
+                        <td class="follow_name"><c:out value="${follow.follower.name}"/></td>
+                        <td class="follow_action"><a href="<c:url value='?action=${actFol}&command=${commShow}&id=${follow.follower.id}' />">日報一覧</a></td>
                 </c:forEach>
             </tbody>
         </table>

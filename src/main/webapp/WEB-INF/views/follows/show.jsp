@@ -6,12 +6,14 @@
 <c:set var="action" value="${ForwardConst.ACT_FOL.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commCrt" value="${ForwardConst.CMD_CREATE.getValue()}" />
+<c:set var="actFol" value="${ForwardConst.ACT_FOL.getValue()}" />
+<c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 
 
 <!-- 指定した社員の日報一覧を表示する -->
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>社員番号○○　氏名　××さんの日報一覧</h2><!-- 指定した社員の社員番号と氏名を表示するように変更 -->
+        <h2>社員番号 ${follow.follower.id}　氏名　${follow.follower.name}さんの日報一覧</h2><!-- 指定した社員の社員番号と氏名を表示するように変更 -->
         <table>
             <tbody>
                 <tr>
@@ -21,7 +23,7 @@
                 </tr>
                 <tr>
                     <th>氏名</th>
-                    <td><c:out value="${follow.employee.name}" /></td>
+                    <td><c:out value="${employee.name}" /></td>
                 </tr>
                 <tr>
                     <th>操作</th>
@@ -31,5 +33,5 @@
         </table>
     </c:param>
 
-    <p><a href="<c:url value='?action=${action}&command=${commIdx}' />">フォロー社員一覧に戻る</a></p>
+    <p><a href="<c:url value='?action=${actFol}&command=${commIdx}' />">フォロー社員一覧に戻る</a></p>
 </c:import>

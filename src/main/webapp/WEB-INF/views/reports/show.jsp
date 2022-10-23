@@ -50,8 +50,6 @@
         <p>
             <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a>
         </p>
-        <p>
-            <a href="<c:url value='?action=${actFol}&command=${commFol}' />">フォローする</a><!-- フォローのコマンドはダミー -->
-        </p>
+
     </c:param>
 </c:import>
